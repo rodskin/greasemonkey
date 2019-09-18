@@ -90,7 +90,26 @@ elem.value = '@CANCELED';
 elem.type = 'button';
 elem.style.background = 'red';
 elem.style.color = 'white';
+elem.style.marginRight = '4px';
 
 elem.addEventListener('click', myCancel, false);
+
+jQuery(".jstElements").append(elem);
+
+
+// ESTIMATE
+function myEstimate() {
+  var issues_text = jQuery('#issue_notes').val();
+  issues_text += "\r\n" + '%{background:purple; color:white}@ESTIMATE% : ';
+  jQuery('#issue_notes').val(issues_text);
+  return false;
+}
+var elem = document.createElement("input"); 
+elem.value = '@ESTIMATE';
+elem.type = 'button';
+elem.style.background = 'purple';
+elem.style.color = 'white';
+
+elem.addEventListener('click', myEstimate, false);
 
 jQuery(".jstElements").append(elem);
