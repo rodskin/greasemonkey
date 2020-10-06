@@ -16,8 +16,14 @@ jQuery("#drop_legende").prepend(elem);
 function reportLegend (event) {
 	setTimeout(function(){
       var tooltip_info = jQuery('.dhtmlXTooltip').html();
+    	tooltip_info = replaceURLWithHTMLLinks(tooltip_info);
       jQuery('#rod_tooltip').html(tooltip_info);
   }, 500);
+}
+
+function replaceURLWithHTMLLinks(text) {
+    var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+    return text.replace(exp,"<a href='$1' target='_blank'>$1</a>"); 
 }
 
 jQuery('body').on('mouseenter', '.dhx_cal_event_line', function (e){
