@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name     Redmine add buttons
-// @version  1
+// @version  1.3
 // @grant    none
 // @require https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js 
 // ==/UserScript==
@@ -109,7 +109,26 @@ elem.value = '@ESTIMATE';
 elem.type = 'button';
 elem.style.background = 'purple';
 elem.style.color = 'white';
+elem.style.marginRight = '4px';
 
 elem.addEventListener('click', myEstimate, false);
+
+jQuery(".jstElements").append(elem);
+
+
+// CONTACT
+function myContact() {
+  var issues_text = jQuery('#issue_notes').val();
+  issues_text += "\r\n" + '%{background:cyan; color:black}@CONTACT% : ';
+  jQuery('#issue_notes').val(issues_text);
+  return false;
+}
+var elem = document.createElement("input"); 
+elem.value = '@CONTACT';
+elem.type = 'button';
+elem.style.background = 'cyan';
+elem.style.color = 'black';
+
+elem.addEventListener('click', myContact, false);
 
 jQuery(".jstElements").append(elem);
