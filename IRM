@@ -1,0 +1,34 @@
+// ==UserScript==
+// @name     IRM calendar
+// @version  1
+// @grant    none
+// @require https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
+// ==/UserScript==
+
+
+jQuery(document).ready(function() {
+  jQuery('.rounded-full').each(function () {
+    var rounded_text = jQuery(this).text().trim()
+    switch (rounded_text) {
+      case 'RfJ':
+      case 'CP/2A':
+        jQuery(this).css('background', 'blue');
+        jQuery(this).css('color', 'white');
+        jQuery(this).text('CP 1/2');
+        break;
+      case 'PA':
+        jQuery(this).css('background', 'green');
+        jQuery(this).css('color', 'white');
+        break;
+      case 'OFF':
+        jQuery(this).css('background', 'black');
+        jQuery(this).css('color', 'white');
+        break;
+      case 'JF':
+        jQuery(this).css('background', 'black');
+        jQuery(this).css('color', 'white');
+        jQuery(this).text('Férié');
+        break;
+    }
+  })
+});
