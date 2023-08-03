@@ -1,0 +1,53 @@
+// ==UserScript==
+// @name     KS hide received projects
+// @author 	rodskin
+// @version  1
+// @grant    none
+// @require https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
+// ==/UserScript==
+
+
+var also_hide = [
+  'backing_143083214', // Sentinels of the multiverse
+  'backing_149364791', // Lost Empires
+  'backing_151762610', // Make 100 Subsistence
+  'backing_152850197', // Sentinels of the multiverse : Rook City
+  'backing_156329016', // Runes of Zun Reckless Magic + New Tiers & Add Ons!
+  'backing_154069354', //UND1C1
+  'backing_144610108' // Orbtale
+];
+function hideCollected () {
+
+  jQuery('#collected table tbody tr').each(function() {
+    if (jQuery(this).attr('id') in oc(also_hide)) {
+        jQuery(this).css('display', 'none')
+    }
+    if(jQuery(this).find('.checkbox').val() == "true") {
+      jQuery(this).css('display', 'none')
+    }
+  })
+}
+
+function oc(a)
+{
+ var o = {};
+ for(var i=0;i<a.length;i++)
+ {
+  o[a[i]]='';
+ }
+  return o;
+}
+
+jQuery(document).ready(function() {
+  jQuery('#collected > table').on('DOMNodeInserted', function(){
+  	//hideCollected()
+	});
+});
+
+var elem = document.createElement("input"); 
+elem.value = 'Hide collected';
+elem.type = 'button';
+
+elem.addEventListener('click', hideCollected, false);
+
+jQuery("#main").prepend(elem);
