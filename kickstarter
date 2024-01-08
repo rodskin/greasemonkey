@@ -14,6 +14,8 @@ var also_hide = [
   'backing_152850197', // Sentinels of the multiverse : Rook City
   'backing_156329016', // Runes of Zun Reckless Magic + New Tiers & Add Ons!
   'backing_154069354', //UND1C1
+  'backing_167843627', // worms
+  'backing_35892588', // power drive 2000
   'backing_144610108' // Orbtale
 ];
 function hideCollected () {
