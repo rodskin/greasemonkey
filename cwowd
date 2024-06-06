@@ -1,0 +1,30 @@
+// ==UserScript==
+// @name     Cwowd redflags
+// @author 	rodskin
+// @version  1
+// @grant    none
+// @require https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
+// @match   https://www.kickstarter.com/projects/*
+// ==/UserScript==
+
+
+function findCreatorUrl(creators, creatorName) {
+    var foundCreator = creators.find(function(item) {
+        return item.name === creatorName
+    });
+    return foundCreator ? '<a href="' + foundCreator.url + '"><br>Cwowd: <img width="30px" height="30px" src="https://cdn-icons-png.flaticon.com/512/11367/11367781.png" /></a>' : null
+}
+
+jQuery(document).ready(function() {
+  var url = "https://rodskin.cards/cwowd_rf.json"
+
+  $.getJSON(url, function(redflags) {
+    var creators = jQuery(".creator-name a span")
+    creators.each(function() {
+      var creatorName = jQuery(this).html()
+      jQuery(this).parent().parent().append(findCreatorUrl(redflags, creatorName))
+    });
+  }).fail(function() {
+      console.error("Une erreur est survenue lors de la récupération du JSON.")
+  });
+});
