@@ -4,6 +4,7 @@
 // @version  1
 // @grant    none
 // @require https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
+// @match https://www.kickstarter.com/profile/backings*
 // ==/UserScript==
 
 
@@ -52,4 +53,4 @@ elem.type = 'button';
 
 elem.addEventListener('click', hideCollected, false);
 
-jQuery("#main").prepend(elem);
+jQuery("#collected").prepend(elem);
