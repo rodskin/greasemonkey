@@ -12,18 +12,31 @@ function findCreatorUrl(creators, creatorName) {
     var foundCreator = creators.find(function(item) {
         return item.name === creatorName
     });
-    return foundCreator ? '<a href="' + foundCreator.url + '"><br>Cwowd: <img width="30px" height="30px" src="https://cdn-icons-png.flaticon.com/512/11367/11367781.png" /></a>' : null
+  	return foundCreator ? foundCreator.url : false
+    //return foundCreator ? '<a href="' + foundCreator.url + '"><br>Cwowd: <img width="30px" height="30px" src="https://cdn-icons-png.flaticon.com/512/11367/11367781.png" /></a>' : null
 }
 
 jQuery(document).ready(function() {
   var url = "https://rodskin.cards/cwowd_rf.json"
+  
+  
+  const currentUrl = window.location.href
+  
+  const parsedUrl = new URL(currentUrl);
+  const pathname = parsedUrl.pathname;
 
-  $.getJSON(url, function(redflags) {
-    var creators = jQuery(".creator-name a span")
-    creators.each(function() {
-      var creatorName = jQuery(this).html()
-      jQuery(this).parent().parent().append(findCreatorUrl(redflags, creatorName))
-    });
+  // Récupérer la partie après "/projects/"
+  const parts = pathname.split("/projects/")[1];
+  const creator = parts.split('/')[0]
+
+
+  jQuery.getJSON(url, function(redflags) {
+    cwowdUrl = findCreatorUrl(redflags, creator)
+    if (cwowdUrl != '') {
+      setTimeout(function () {
+        jQuery('h2.project-name').append('<a href="' + cwowdUrl + '"><br>Cwowd: <img width="30px" height="30px" src="https://cdn-icons-png.flaticon.com/512/11367/11367781.png" /></a>')
+      }, 2000);
+    }
   }).fail(function() {
       console.error("Une erreur est survenue lors de la récupération du JSON.")
   });
